@@ -5,13 +5,13 @@ import os
 
 app = Flask(__name__)
 
-# ----------------- MongoDB Atlas Connection -----------------
+# MongoDB Atlas Connection
 MONGO_URI = "mongodb+srv://admin:admin@cluster0.djhrcyo.mongodb.net/"
 client = MongoClient(MONGO_URI)
 db = client["test_database"]
 collection = db["test_collection"]
 
-# ----------------- API Route -----------------
+# API Route
 @app.route("/api", methods=["GET"])
 def get_data():
     try:
@@ -21,7 +21,7 @@ def get_data():
     except FileNotFoundError:
         return jsonify({"error": "data.json not found"}), 404
 
-# ----------------- Form Route -----------------
+#  Form Route 
 @app.route("/form", methods=["GET", "POST"])
 def form():
     error_message = None
@@ -47,11 +47,11 @@ def form():
 
     return render_template("form.html", error=error_message)
 
-# ----------------- Success Route -----------------
+#  Success Route 
 @app.route("/success")
 def success():
     return render_template("success.html")
 
-# ----------------- Main -----------------
+#  Main 
 if __name__ == "__main__":
     app.run(debug=True)
